@@ -1,2 +1,2 @@
 include ':app'
-rootProject.name = "android-app-clear-wechat"
+rootProject.name = "android-app-clear-wechat-cache"
