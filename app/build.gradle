@@ -5,10 +5,9 @@ android {
     buildToolsVersion "30.0.2"
 
     defaultConfig {
-        applicationId "com.ta.a"
+        applicationId "com.ms.app"
         minSdkVersion 16
-        // 此处30 还未处理
-        targetSdkVersion 28
+        targetSdkVersion 30
         versionCode 1
         versionName "1.0"
 
@@ -44,6 +43,8 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
 
+
+    implementation 'com.hjq:xxpermissions:8.8'
 }
 
 // 生命周期
