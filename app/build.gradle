@@ -55,6 +55,9 @@ dependencies {
     implementation group: 'io.reactivex.rxjava2', name: 'rxandroid', version: '2.1.1'
 
 
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.4'
+
+
 }
 
 // 生命周期

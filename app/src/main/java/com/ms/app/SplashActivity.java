@@ -1,6 +1,5 @@
 package com.ms.app;
 
-import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,7 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.hjq.permissions.OnPermission;
 import com.hjq.permissions.Permission;
 import com.hjq.permissions.XXPermissions;
-import com.ms.app.permission.PermissionUtilsImpl;
+import com.ms.app.ui.activity.wechat.ing.WeChatClearScanIngActivity;
+
 
 import java.util.List;
 
@@ -35,7 +35,7 @@ public class SplashActivity extends AppCompatActivity {
                     @Override
                     public void hasPermission(List<String> granted, boolean all) {
                         if (all) {
-                            startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                            startActivity(new Intent(SplashActivity.this, WeChatClearScanIngActivity.class));
                             finish();
                         }
                     }

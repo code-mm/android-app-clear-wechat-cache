@@ -2,6 +2,8 @@ package com.ms.app;
 
 import androidx.lifecycle.LiveData;
 
+import com.ms.app.utils.WeChatClearUtils;
+
 import java.util.List;
 
 public class ContentRepository {

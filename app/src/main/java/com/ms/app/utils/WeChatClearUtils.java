@@ -1,4 +1,4 @@
-package com.ms.app;
+package com.ms.app.utils;
 
 import android.util.Log;
 
@@ -344,4 +344,18 @@ public class WeChatClearUtils {
         }
         return removeDuplicateElements(result);
     }
+
+
+    public static List<String> rubbish()
+    {
+        List<String> result = new ArrayList<>();
+        List<String> accounts = accounts();
+
+        for (String it : accounts) {
+            String path = ANDROID_DATA_MicroMsg + "/" + it + "/" + voice2;
+            search(result, path);
+        }
+        return removeDuplicateElements(result);
+    }
+
 }

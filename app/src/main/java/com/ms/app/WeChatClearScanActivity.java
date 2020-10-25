@@ -3,26 +3,24 @@ package com.ms.app;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.os.SystemClock;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.ms.app.utils.WeChatClearUtils;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -63,8 +61,6 @@ public class WeChatClearScanActivity extends AppCompatActivity {
     private static long COUNT_SIZE = 0;
 
 
-
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,7 +82,6 @@ public class WeChatClearScanActivity extends AppCompatActivity {
 
         rubbish();
         refresh();
-
     }
 
 
@@ -456,7 +451,12 @@ public class WeChatClearScanActivity extends AppCompatActivity {
                 Glide.with(context).load(R.drawable.image_no_start).into(viewHolder.imageViewStatus);
 
             } else if (datas.get(position).status == 1) {
-                Glide.with(context).load(R.drawable.image_loading).into(viewHolder.imageViewStatus);
+                Glide.with(context).load(R.drawable.image_loading)
+                        .into(viewHolder.imageViewStatus);
+
+                Animation animation = AnimationUtils.loadAnimation(context,R.anim.anim_loading_ing);
+                viewHolder.imageViewStatus.startAnimation(animation);
+
             } else if (datas.get(position).status == 2) {
                 Glide.with(context).load(R.drawable.image_finish).into(viewHolder.imageViewStatus);
             }
