@@ -40,5 +40,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".WeChatClearScanActivity">
+
+
+
+        </activity>
+
+        <activity android:name=".WeChatClearActivity">
+
+        </activity>
+
     </application>
 </manifest>

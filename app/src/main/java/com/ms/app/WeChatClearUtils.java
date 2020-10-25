@@ -335,7 +335,6 @@ public class WeChatClearUtils {
      * @return
      */
     public static List<String> voice2() {
-
         List<String> result = new ArrayList<>();
         List<String> accounts = accounts();
 

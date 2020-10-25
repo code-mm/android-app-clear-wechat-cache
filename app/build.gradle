@@ -45,6 +45,16 @@ dependencies {
 
 
     implementation 'com.hjq:xxpermissions:8.8'
+
+
+
+    // https://mvnrepository.com/artifact/io.reactivex.rxjava2/rxjava
+    implementation group: 'io.reactivex.rxjava2', name: 'rxjava', version: '2.2.20'
+
+    // https://mvnrepository.com/artifact/io.reactivex.rxjava2/rxandroid
+    implementation group: 'io.reactivex.rxjava2', name: 'rxandroid', version: '2.1.1'
+
+
 }
 
 // 生命周期

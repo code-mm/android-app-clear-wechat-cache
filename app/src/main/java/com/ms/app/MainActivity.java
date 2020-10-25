@@ -21,6 +21,8 @@ public class MainActivity extends AppCompatActivity {
     private Button buttonWeChatImage;
     private Button buttonWeChatVoice2;
 
+    private Button buttonProd;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         buttonWeChatMP4 = findViewById(R.id.buttonWeChatMP4);
         buttonWeChatImage = findViewById(R.id.buttonWeChatImage);
         buttonWeChatVoice2 = findViewById(R.id.buttonWeChatVoice2);
+        buttonProd = findViewById(R.id.buttonProd);
 
         buttonOpenOtherAppPermission.setOnClickListener(v -> {
             Intent intent = new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS);
@@ -84,6 +87,16 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, ContentActivity.class);
             intent.putExtra("type", "VOICE2");
             startActivity(intent);
+        });
+
+        buttonProd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                startActivity(new Intent(MainActivity.this,WeChatClearScanActivity.class));
+
+            }
         });
 
 
