@@ -1,6 +1,7 @@
 package com.ms.app;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -10,8 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.hjq.permissions.OnPermission;
 import com.hjq.permissions.Permission;
 import com.hjq.permissions.XXPermissions;
-
-import com.ms.module.wechat.clear.WeChatClearSdk;
 
 
 import java.util.List;
@@ -35,7 +34,7 @@ public class SplashActivity extends AppCompatActivity {
                     @Override
                     public void hasPermission(List<String> granted, boolean all) {
                         if (all) {
-                            WeChatClearSdk.start(SplashActivity.this);
+                            startActivity(new Intent(SplashActivity.this, MainActivity.class));
                             finish();
                         }
                     }

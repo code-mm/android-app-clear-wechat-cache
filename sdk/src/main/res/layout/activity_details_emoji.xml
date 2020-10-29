@@ -65,20 +65,18 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="5dp"
-                android:layout_toLeftOf="@id/checkBoxSelectAll"
+                android:layout_toLeftOf="@id/imageViewCheck"
                 android:text="全选" />
 
 
-            <CheckBox
-                android:id="@+id/checkBoxSelectAll"
+            <ImageView
+                android:id="@+id/imageViewCheck"
                 android:layout_width="16.67dp"
                 android:layout_height="16.67dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="10dp"
-                android:background="@drawable/selector_select_checkbox"
-                android:button="@null"
-                android:checked="true" />
+                android:background="@drawable/selector_select_image" />
 
         </RelativeLayout>
 

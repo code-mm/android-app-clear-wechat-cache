@@ -28,18 +28,23 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_marginRight="10dp"
-        android:layout_toLeftOf="@id/checkBoxSelect"
+        android:layout_toLeftOf="@id/imageViewCheck"
         android:text="162kb" />
 
-    <CheckBox
-        android:background="@drawable/selector_select_checkbox"
+
+
+
+    <ImageView
+        android:background="@drawable/selector_select_image"
         android:button="@null"
-        android:id="@+id/checkBoxSelect"
+        android:id="@+id/imageViewCheck"
         android:layout_width="16.67dp"
         android:layout_height="16.67dp"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="10dp" />
+
+
 
 
     <View

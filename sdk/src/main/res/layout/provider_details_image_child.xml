@@ -13,14 +13,13 @@
         />
 
 
-    <CheckBox
-        android:background="@drawable/selector_select_checkbox"
-        android:button="@null"
-        android:id="@+id/checkBoxSelect"
+    <ImageView
+        android:id="@+id/imageViewCheck"
         android:layout_width="16.67dp"
         android:layout_height="16.67dp"
         android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true" />
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/selector_select_image" />
 
 
 </RelativeLayout>

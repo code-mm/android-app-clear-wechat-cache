@@ -3,8 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.ms.module.wechat.clear">
 
-
-
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
@@ -19,25 +17,42 @@
         android:name="android.permission.PACKAGE_USAGE_STATS"
         tools:ignore="ProtectedPermissions" />
 
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application>
 
-        <activity android:name=".ui.activity.wechat.ing.WeChatClearScanIngActivity" />
+        <activity
+            android:name=".activity.scan.WeChatClearScanIngActivity"
 
-        <activity android:name=".ui.activity.wechat.clear.WeChatClearActivity" />
+            android:launchMode="singleTask" />
 
-        <activity android:name=".ui.activity.wechat.image.ImageActivity" />
+        <activity
+            android:name=".activity.clear.WeChatClearActivity"
+            android:launchMode="singleTask" />
 
-        <activity android:name=".ui.activity.wechat.video.VideoDetailsActivity" />
+        <activity
+            android:name=".activity.image.ImageActivity"
+            android:launchMode="singleTask" />
 
-        <activity android:name=".ui.activity.wechat.emoji.EmojiDetailsActivity" />
+        <activity
+            android:name=".activity.video.VideoDetailsActivity"
+            android:launchMode="singleTask" />
 
-        <activity android:name=".ui.activity.wechat.file.FileDetailsActivity" />
+        <activity
+            android:name=".activity.emoji.EmojiDetailsActivity"
+            android:launchMode="singleTask" />
 
-        <activity android:name=".ui.activity.wechat.image.ImageDetailsActivity" />
+        <activity
+            android:name=".activity.file.FileDetailsActivity"
+            android:launchMode="singleTask" />
 
-        <activity android:name=".ui.activity.wechat.voice.VoiceDetailsActivity" />
+        <activity
+            android:name=".activity.image.ImageDetailsActivity"
+            android:launchMode="singleTask" />
+
+        <activity
+            android:name=".activity.voice.VoiceDetailsActivity"
+            android:launchMode="singleTask" />
 
     </application>
 

@@ -40,20 +40,22 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_marginRight="10dp"
-        android:layout_toLeftOf="@id/checkBoxSelectAll"
+        android:layout_toLeftOf="@id/imageViewCheck"
         android:text=""
         android:textColor="#999999"
         android:textSize="16sp" />
 
-    <CheckBox
-        android:background="@drawable/selector_select_checkbox"
+    <ImageView
+        android:background="@drawable/selector_select_image"
         android:button="@null"
-        android:id="@+id/checkBoxSelectAll"
+        android:id="@+id/imageViewCheck"
         android:layout_width="16.67dp"
         android:layout_height="16.67dp"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="10dp" />
+
+
 
 
 </RelativeLayout>

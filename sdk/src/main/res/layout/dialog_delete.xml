@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/selector_dialog_background_white">
+
+
+    <TextView
+        android:id="@+id/textViewTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:text="确认删除"
+        android:textColor="#4d4d4d"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/textViewContext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewTitle"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="25dp"
+        android:text="选中的文件，删除后不可恢复！"
+        android:textColor="#4d4d4d"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/textViewLine"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/textViewContext"
+        android:layout_marginTop="13dp"
+        android:background="#C3C3C3" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewLine"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/buttonCancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/shape_white"
+            android:text="取消"
+            android:textColor="#4d4d4d" />
+
+        <TextView
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_below="@id/textViewContext"
+            android:background="@drawable/shape_white" />
+
+        <Button
+            android:id="@+id/buttonDelete"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/shape_white"
+            android:text="删除"
+            android:textColor="#0093e9" />
+
+    </LinearLayout>
+
+</RelativeLayout>
