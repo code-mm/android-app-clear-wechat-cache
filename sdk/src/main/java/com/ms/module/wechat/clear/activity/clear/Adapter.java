@@ -10,7 +10,6 @@ import java.util.List;
 public class Adapter extends BaseNodeAdapter {
     public Adapter() {
         super();
-
         addNodeProvider(new UpGroupProvider());
         addNodeProvider(new UpChildProvider());
         addNodeProvider(new DownGroupProvider());

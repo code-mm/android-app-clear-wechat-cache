@@ -12,6 +12,7 @@ import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.ms.module.wechat.clear.R;
 import com.ms.module.wechat.clear.utils.ByteSizeToStringUnitUtils;
 import com.ms.module.wechat.clear.utils.ListDataUtils;
+import com.ms.module.wechat.clear.utils.OpenFileUtils;
 
 
 import org.jetbrains.annotations.NotNull;
@@ -38,33 +39,39 @@ public class FileChildProvider extends BaseNodeProvider {
         ImageView imageViewCheck = baseViewHolder.findView(R.id.imageViewCheck);
 
         if (baseNode instanceof FileChildNode) {
-            FileChildNode fileChildNode = (FileChildNode) baseNode;
-            File file = new File(fileChildNode.getPath());
+            FileChildNode childNode = (FileChildNode) baseNode;
+            File file = new File(childNode.getPath());
             String name = file.getName();
             long length = file.length();
             textViewName.setText(name);
             textViewSize.setText(ByteSizeToStringUnitUtils.byteToStringUnit(length));
-            imageViewCheck.setSelected(fileChildNode.isCheck());
+            imageViewCheck.setSelected(childNode.isCheck());
 
+            baseViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    OpenFileUtils.openFileByPath(context,childNode.getPath());
+                }
+            });
 
             imageViewCheck.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
                     boolean selected = imageViewCheck.isSelected();
-
-
                     if (selected) {
                         imageViewCheck.setSelected(false);
-                        fileChildNode.setCheck(false);
+                        childNode.setCheck(false);
                     } else {
                         imageViewCheck.setSelected(true);
-                        fileChildNode.setCheck(true);
+                        childNode.setCheck(true);
                     }
 
 
                     getAdapter().notifyDataSetChanged();
-                    FileDetailsActivity.getInstance().updateSelectAll();
+
+                    if (FileDetailsActivity.getInstance() != null) {
+                        FileDetailsActivity.getInstance().updateSelectAll();
+                    }
 
                 }
             });

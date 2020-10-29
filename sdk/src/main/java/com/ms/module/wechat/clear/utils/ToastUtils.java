@@ -5,11 +5,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.widget.Toast;
 
-import java.util.HashMap;
-
-
 public class ToastUtils {
-
 
     private static Handler handler = new Handler(Looper.getMainLooper());
 

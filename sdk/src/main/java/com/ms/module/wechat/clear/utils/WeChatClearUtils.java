@@ -1,32 +1,29 @@
 package com.ms.module.wechat.clear.utils;
 
-import android.content.Context;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.util.Log;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.TimeZone;
 
+/**
+ * 微信清理核心工具类
+ */
 public class WeChatClearUtils {
 
+    private static final String TAG = "WeChatClearUtils";
     // 微信包名称
     //com.tencent.mm
     private static final String WECHAT_PACKAGE_NAME = "com.tencent.mm";
 
-    private static final String TAG = "WeChatClearUtils";
-
     // 图片
-    public static final String Pictures = "/sdcard/Pictures/WeiXin";
+    public static final String PICTURES = "/sdcard/Pictures/WeiXin";
 
     // 外部 缓冲数据
-    public static final String MicroMsg = "/sdcard/tencent/MicroMsg";
+    public static final String MICROMSG = "/sdcard/tencent/MicroMsg";
 
     // 内部 缓冲数据
-    public static final String ANDROID_DATA_MicroMsg = "/sdcard/Android/data/com.tencent.mm/MicroMsg";
+    public static final String ANDROID_DATA_MICROMSG = "/sdcard/Android/data/com.tencent.mm/MicroMsg";
 
     // 缓冲路径
     public static final String CACHE = "/sdcard/Android/data/com.tencent.mm/cache";
@@ -35,36 +32,36 @@ public class WeChatClearUtils {
     public static final String DOWNLOAD = "/sdcard/Android/data/com.tencent.mm/MicroMsg/Download";
 
 
-    public static final String attachment = "attachment";
+    public static final String ATTACHMENT = "attachment";
     // 头像
-    public static final String avatar = "avatar";
-    public static final String bizcache = "bizcache";
-    public static final String bizimg = "bizimg";
-    public static final String brandicon = "brandicon";
-    public static final String draft = "draft";
+    public static final String AVATAR = "avatar";
+    public static final String BIZCACHE = "bizcache";
+    public static final String BIZIMG = "bizimg";
+    public static final String BRANDICON = "brandicon";
+    public static final String DRAFT = "draft";
     //emoji
-    public static final String emoji = "emoji";
-    public static final String favoffline = "favoffline";
-    public static final String favorite = "favorite";
-    public static final String image = "image";
-    public static final String image2 = "image2";
-    public static final String mailapp = "mailapp";
-    public static final String music = "music";
-    public static final String oneday = "oneday";
-    public static final String openapi = "openapi";
-    public static final String openapi_cache = "openapi_cache";
-    public static final String openim = "openim";
-    public static final String _package = "package";
-    public static final String patmsg = "patmsg";
-    public static final String recbiz = "recbiz";
-    public static final String record = "record";
-    public static final String scanner = "scanner";
-    public static final String video = "video";
-    public static final String voice = "voice";
-    public static final String voice2 = "voice2";
-    public static final String voiceremind = "voiceremind";
-    public static final String webcanvascache = "webcanvascache";
-    public static final String wenote = "wenote";
+    public static final String EMOJI = "emoji";
+    public static final String FAVOFFLINE = "favoffline";
+    public static final String FAVORITE = "favorite";
+    public static final String IMAGE = "image";
+    public static final String IMAGE2 = "image2";
+    public static final String MAILAPP = "mailapp";
+    public static final String MUSIC = "music";
+    public static final String ONEDAY = "oneday";
+    public static final String OPENAPI = "openapi";
+    public static final String OPENAPI_CACHE = "openapi_cache";
+    public static final String OPENIM = "openim";
+    public static final String _PACKAGE = "package";
+    public static final String PATMSG = "patmsg";
+    public static final String RECBIZ = "recbiz";
+    public static final String RECORD = "record";
+    public static final String SCANNER = "scanner";
+    public static final String VIDEO = "video";
+    public static final String VOICE = "voice";
+    public static final String VOICE2 = "voice2";
+    public static final String VOICEREMIND = "voiceremind";
+    public static final String WEBCANVASCACHE = "webcanvascache";
+    public static final String WENOTE = "wenote";
 
 
     public static final String JPG = ".jpg";
@@ -84,18 +81,18 @@ public class WeChatClearUtils {
      * @return
      */
     public static List<String> removeDuplicateElements(List<String> data) {
-        HashSet ckear = new HashSet(data);
+        HashSet hashSetClear = new HashSet(data);
         data.clear();
-        data.addAll(ckear);
+        data.addAll(hashSetClear);
         return data;
     }
 
     /**
      * 去除没有后缀的文件
      */
-    public static List<String> removeFilesWithoutSuffix(List<String> datas) {
+    public static List<String> removeFilesWithoutSuffix(List<String> list) {
         List<String> result = new ArrayList<>();
-        for (String it : datas) {
+        for (String it : list) {
             File file = new File(it);
             if (file.getName().lastIndexOf(".") != -1) {
                 result.add(it);
@@ -111,6 +108,9 @@ public class WeChatClearUtils {
      * @return
      */
     public static long getFileLastModifiedTime(File file) {
+        if (file == null) {
+            return 0;
+        }
         long time = file.lastModified();
         return time;
     }
@@ -122,6 +122,10 @@ public class WeChatClearUtils {
      * @return
      */
     public static long getFileLastModifiedTime(String path) {
+        if (path == null || "".equals(path)) {
+            return 0;
+        }
+
         File file = new File(path);
         if (file.exists()) {
             long time = file.lastModified();
@@ -156,8 +160,6 @@ public class WeChatClearUtils {
                     result.add(it.getPath());
                 }
             }
-        } else {
-            Log.e(TAG, "search: " + path + " not exists ");
         }
     }
 
@@ -187,8 +189,6 @@ public class WeChatClearUtils {
                     result.add(it.getPath());
                 }
             }
-        } else {
-            Log.e(TAG, "search: " + path + " not exists ");
         }
     }
 
@@ -201,8 +201,8 @@ public class WeChatClearUtils {
      */
     public static List<String> fileTypeToFiles(String fileType) {
         List<String> result = new ArrayList<>();
-        search(result, Pictures, fileType);
-        search(result, MicroMsg, fileType);
+        search(result, PICTURES, fileType);
+        search(result, MICROMSG, fileType);
         return removeDuplicateElements(result);
     }
 
@@ -214,8 +214,8 @@ public class WeChatClearUtils {
 
     public static List<String> jpg() {
         List<String> result = new ArrayList<>();
-        search(result, Pictures, JPG);
-        search(result, MicroMsg, JPG);
+        search(result, PICTURES, JPG);
+        search(result, MICROMSG, JPG);
         return removeDuplicateElements(result);
     }
 
@@ -226,8 +226,8 @@ public class WeChatClearUtils {
      */
     public static List<String> png() {
         List<String> result = new ArrayList<>();
-        search(result, Pictures, PNG);
-        search(result, MicroMsg, PNG);
+        search(result, PICTURES, PNG);
+        search(result, MICROMSG, PNG);
         return removeDuplicateElements(result);
     }
 
@@ -238,8 +238,8 @@ public class WeChatClearUtils {
      */
     public static List<String> mp3() {
         List<String> result = new ArrayList<>();
-        search(result, Pictures, MP3);
-        search(result, MicroMsg, MP3);
+        search(result, PICTURES, MP3);
+        search(result, MICROMSG, MP3);
         return removeDuplicateElements(result);
     }
 
@@ -250,8 +250,8 @@ public class WeChatClearUtils {
      */
     public static List<String> mp4() {
         List<String> result = new ArrayList<>();
-        search(result, Pictures, MP4);
-        search(result, MicroMsg, MP4);
+        search(result, PICTURES, MP4);
+        search(result, MICROMSG, MP4);
         return removeDuplicateElements(result);
     }
 
@@ -262,8 +262,8 @@ public class WeChatClearUtils {
      */
     public static List<String> avi() {
         List<String> result = new ArrayList<>();
-        search(result, Pictures, AVI);
-        search(result, MicroMsg, AVI);
+        search(result, PICTURES, AVI);
+        search(result, MICROMSG, AVI);
         return removeDuplicateElements(result);
     }
 
@@ -275,8 +275,8 @@ public class WeChatClearUtils {
      */
     public static List<String> video() {
         List<String> result = new ArrayList<>();
-        search(result, Pictures, MP4);
-        search(result, MicroMsg, MP4);
+        search(result, PICTURES, MP4);
+        search(result, MICROMSG, MP4);
         return removeDuplicateElements(result);
     }
 
@@ -286,16 +286,16 @@ public class WeChatClearUtils {
      *
      * @return
      */
-    public static List<String> images() {
+    public static List<String> image() {
         List<String> result = new ArrayList<>();
-        search(result, Pictures, PNG);
-        search(result, MicroMsg, PNG);
-        search(result, Pictures, JPEG);
-        search(result, MicroMsg, JPEG);
-        search(result, Pictures, JPG);
-        search(result, MicroMsg, JPG);
-        search(result, Pictures, WEBP);
-        search(result, MicroMsg, WEBP);
+        search(result, PICTURES, PNG);
+        search(result, MICROMSG, PNG);
+        search(result, PICTURES, JPEG);
+        search(result, MICROMSG, JPEG);
+        search(result, PICTURES, JPG);
+        search(result, MICROMSG, JPG);
+        search(result, PICTURES, WEBP);
+        search(result, MICROMSG, WEBP);
 
         return removeDuplicateElements(result);
     }
@@ -317,13 +317,13 @@ public class WeChatClearUtils {
      *
      * @return
      */
-    public static List<String> emojis() {
+    public static List<String> emoji() {
 
         List<String> result = new ArrayList<>();
         List<String> accounts = accounts();
 
         for (String it : accounts) {
-            String path = ANDROID_DATA_MicroMsg + "/" + it + "/" + emoji;
+            String path = ANDROID_DATA_MICROMSG + "/" + it + "/" + EMOJI;
             search(result, path);
         }
         List<String> newResult = new ArrayList<>();
@@ -345,7 +345,7 @@ public class WeChatClearUtils {
      */
     private static List<String> accounts() {
         List<String> result = new ArrayList<>();
-        File file = new File(ANDROID_DATA_MicroMsg);
+        File file = new File(ANDROID_DATA_MICROMSG);
         if (file.exists()) {
             File[] files = file.listFiles();
             if (files == null || files.length == 0) {
@@ -372,7 +372,7 @@ public class WeChatClearUtils {
         List<String> accounts = accounts();
 
         for (String it : accounts) {
-            String path = ANDROID_DATA_MicroMsg + "/" + it + "/" + voice2;
+            String path = ANDROID_DATA_MICROMSG + "/" + it + "/" + VOICE2;
             search(result, path);
         }
         return removeDuplicateElements(result);
@@ -389,11 +389,11 @@ public class WeChatClearUtils {
      */
     public static List<String> rubbish() {
         List<String> result = new ArrayList<>();
-        String path = ANDROID_DATA_MicroMsg + "/crash";
+        String path = ANDROID_DATA_MICROMSG + "/crash";
         search(result, path);
-        search(result, ANDROID_DATA_MicroMsg + "/wxacache");
-        search(result, ANDROID_DATA_MicroMsg + "/WebNetFile");
-        search(result, ANDROID_DATA_MicroMsg + "/CheckResUpdate");
+        search(result, ANDROID_DATA_MICROMSG + "/wxacache");
+        search(result, ANDROID_DATA_MICROMSG + "/WebNetFile");
+        search(result, ANDROID_DATA_MICROMSG + "/CheckResUpdate");
         return removeDuplicateElements(result);
     }
 
@@ -416,7 +416,7 @@ public class WeChatClearUtils {
      */
     public static List<String> friendCache() {
         List<String> result = new ArrayList<>();
-        String path = ANDROID_DATA_MicroMsg + "/crash";
+        String path = ANDROID_DATA_MICROMSG + "/crash";
         search(result, path);
         return result;
     }
@@ -497,22 +497,4 @@ public class WeChatClearUtils {
         }
         return false;
     }
-
-    //判断是否安装了微信
-    public static boolean isWeixinAvilible(Context context) {
-        // 获取packagemanager
-        final PackageManager packageManager = context.getPackageManager();
-        // 获取所有已安装程序的包信息
-        List<PackageInfo> pinfo = packageManager.getInstalledPackages(0);
-        if (pinfo != null) {
-            for (int i = 0; i < pinfo.size(); i++) {
-                String pn = pinfo.get(i).packageName;
-                if (WECHAT_PACKAGE_NAME.equals(pn)) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
 }

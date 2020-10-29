@@ -26,7 +26,7 @@
 
 
     <ImageView
-        android:id="@+id/imageViewDown"
+        android:id="@+id/imageViewStatus"
         android:layout_width="16.67dp"
         android:layout_height="16.67dp"
         android:layout_centerVertical="true"

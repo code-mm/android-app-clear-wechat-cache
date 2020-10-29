@@ -31,20 +31,19 @@ import java.util.List;
  */
 public class WeChatClearScanIngActivity extends BaseAppCompatActivity implements RxView.Action1<View> {
 
-
     private static final String TAG = "WeChatClearScanIngActiv";
+
     private WeChatClearScanIngActivityViewModel weChatClearScanIngActivityViewModel;
+
     private TextView textViewTotalScanGarbageSize;
+
     private RecyclerView recyclerView;
+
     private WeChatScanIngRecyclerViewAdapter weChatScanIngRecyclerViewAdapter;
+
     private List<WeChatScanIngRecyclerViewAdapter.WeChatScanIngRecyclerViewAdapterItem> datas = new ArrayList<>();
 
-    private List<String> rubbishList = new ArrayList<>();
-    private List<String> voideList = new ArrayList<>();
-    private List<String> imageList = new ArrayList<>();
-    private List<String> voiceList = new ArrayList<>();
-    private List<String> fileList = new ArrayList<>();
-    private List<String> emojiList = new ArrayList<>();
+
 
     private Observer<Long> observerTotalScanGarbageSize;
     private Observer<List<String>> observerRubbish;
@@ -62,26 +61,20 @@ public class WeChatClearScanIngActivity extends BaseAppCompatActivity implements
     private boolean receiveFileFinish = false;
     private boolean emojiFinish = false;
 
-
     private ImageView imageViewBack;
-
     private FastChargeView fastChargeView;
-
 
     @Override
     protected void setStatusBar() {
         super.setStatusBar();
-
         StatusBarUtil.setColor(this, Color.parseColor("#4FACF2"), 0);
         StatusBarUtil.setDarkMode(this);
-
     }
 
     @Override
     protected int getLayout() {
         return R.layout.activity_wechat_clear_scan_ing;
     }
-
 
     @Override
     protected void initView() {

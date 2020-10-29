@@ -18,7 +18,6 @@ public class DialogDelete {
 
     }
 
-
     public static void show(Activity activity, Call call) {
         View view = View.inflate(activity, R.layout.dialog_delete, null);
         Dialog dialog = new Dialog(activity, R.style.DialogManager);
@@ -34,11 +33,10 @@ public class DialogDelete {
         buttonCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 if (call != null) {
                     call.onCancel();
+                    dialog.dismiss();
                 }
-
             }
         });
 
@@ -48,10 +46,10 @@ public class DialogDelete {
 
                 if (call != null) {
                     call.onDelete();
+                    dialog.dismiss();
                 }
             }
         });
-
 
         dialog.show();
     }

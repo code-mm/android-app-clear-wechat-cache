@@ -10,19 +10,14 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.ms.module.wechat.clear.IWeChatClearListener;
 import com.ms.module.wechat.clear.WeChatClearListener;
 import com.ms.module.wechat.clear.WeChatClearModule;
 
 public class MainActivity extends AppCompatActivity {
 
-
     private void show(String text) {
-
         Toast.makeText(this, text, Toast.LENGTH_LONG).show();
-
     }
-
 
     private TextView textViewWeChatClear;
 
@@ -33,15 +28,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         textViewWeChatClear = findViewById(R.id.textViewWeChatClear);
-
-
         textViewWeChatClear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 WeChatClearModule.start(MainActivity.this, new WeChatClearListener() {
-
                     /**
                      * 未安装微信
                      */
@@ -50,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
                         super.onNotInstallWeChat();
                         show("未安装微信");
                     }
-
 
                     /**
                      * 进入扫描页面

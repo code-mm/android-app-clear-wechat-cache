@@ -10,6 +10,11 @@ public class WeChatClearListener  implements IWeChatClearListener{
     }
 
     @Override
+    public void onStartTimestamp(long timestamp) {
+
+    }
+
+    @Override
     public void onEnterWeChatClearScan(Activity activity) {
 
     }

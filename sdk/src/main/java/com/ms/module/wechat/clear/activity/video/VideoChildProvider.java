@@ -1,7 +1,6 @@
 package com.ms.module.wechat.clear.activity.video;
 
 import android.view.View;
-import android.widget.CheckBox;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -11,6 +10,7 @@ import com.chad.library.adapter.base.provider.BaseNodeProvider;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.ms.module.wechat.clear.R;
 import com.ms.module.wechat.clear.activity.file.FileChildNode;
+import com.ms.module.wechat.clear.utils.OpenFileUtils;
 
 
 import org.jetbrains.annotations.NotNull;
@@ -47,14 +47,11 @@ public class VideoChildProvider extends BaseNodeProvider {
                             new RequestOptions()
                                     .frame(5000000)
                                     .centerCrop()
-
                     )
                     .load(new File(videoChildNode.getPath()))
                     .into(imageView);
 
             imageViewCheck.setSelected(videoChildNode.isCheck());
-
-
             imageViewCheck.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -70,15 +67,13 @@ public class VideoChildProvider extends BaseNodeProvider {
                 }
             });
 
-
+            /**
+             * 播放视频
+             */
             baseViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
-//                    Intent intent = new Intent(Intent.ACTION_VIEW);
-//                    Uri uri = Uri.parse("file://" + videoChildNode.getPath());
-//                    intent.setDataAndType(uri, "video/*");
-//                    context.startActivity(intent);
+                    OpenFileUtils.openFileByPath(context, videoChildNode.getPath());
                 }
             });
         }

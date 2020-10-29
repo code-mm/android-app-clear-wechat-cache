@@ -10,14 +10,20 @@ import android.widget.FrameLayout;
 public interface IWeChatClearListener {
 
     // 回调 页面Acttivity
-
     // 广告位
-
 
     /**
      * 未安装微信
      */
     void onNotInstallWeChat();
+
+
+    /**
+     * 启动时间戳
+     *
+     * @param timestamp
+     */
+    void onStartTimestamp(long timestamp);
 
 
     /**
@@ -70,6 +76,11 @@ public interface IWeChatClearListener {
      */
     void onClose(Activity activity);
 
+    /**
+     * 当前扫描垃圾大小
+     *
+     * @param length
+     */
     void onCurrentGarbageSize(long length);
 
 }

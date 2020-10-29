@@ -6,6 +6,8 @@
 
 
     <TextView
+        android:layout_margin="@dimen/dp_10"
+        android:padding="@dimen/dp_10"
         android:id="@+id/textViewWeChatClear"
         android:layout_width="match_parent"
         android:layout_height="100dp"

@@ -6,6 +6,7 @@ import android.content.Intent;
 import com.ms.module.wechat.clear.repository.WeChatScanDataRepository;
 import com.ms.module.wechat.clear.activity.scan.WeChatClearScanIngActivity;
 import com.ms.module.wechat.clear.utils.WeChatClearUtils;
+import com.ms.module.wechat.clear.utils.WeChatUtils;
 
 /**
  * 微信清理模块
@@ -29,7 +30,7 @@ public class WeChatClearModule {
         weChatClearCallBack = callBack;
 
         // 判断是否安装了微信
-        if (!WeChatClearUtils.isWeixinAvilible(activity)) {
+        if (!WeChatUtils.isWeixinAvilible(activity)) {
             if (weChatClearCallBack != null) {
                 weChatClearCallBack.onNotInstallWeChat();
             }

@@ -46,10 +46,10 @@ public class WeChatClearActivity extends BaseAppCompatActivity implements RxView
     private TextView textViewClear;
 
     private TextView textViewSizeUnit;
+
     private Observer<List<BaseNode>> observerDatas;
 
     private ImageView imageViewBack;
-
 
     @Override
     protected int getLayout() {
@@ -81,11 +81,9 @@ public class WeChatClearActivity extends BaseAppCompatActivity implements RxView
         // 扫描完成
         WeChatClearModule.getWeChatClearCallBack().onScanFinish(this);
 
-
         weChatClearActivityViewModel = new ViewModelProvider(this).get(WeChatClearActivityViewModel.class);
 
         try {
-
             if (WeChatScanDataRepository.getInstance().getMutableLiveDataTotalScanGarbageSize() != null) {
                 Long value = WeChatScanDataRepository.getInstance().getMutableLiveDataTotalScanGarbageSize().getValue();
                 if (value == null) {
@@ -141,9 +139,9 @@ public class WeChatClearActivity extends BaseAppCompatActivity implements RxView
             long filesLength = WeChatScanDataRepository.getInstance().getFilesLength(datas);
 
 
-            Log.e(TAG, "onClick: 文件总大小 "+filesLength );
-            Log.e(TAG, "onClick: 开始删除 " );
-            WeChatScanDataRepository.getInstance().deleteFile(datas,adapter);
+            Log.e(TAG, "onClick: 文件总大小 " + filesLength);
+            Log.e(TAG, "onClick: 开始删除 ");
+            WeChatScanDataRepository.getInstance().deleteFile(datas, adapter);
 
             WeChatClearModule.getWeChatClearCallBack().onClearUpNow(this);
 

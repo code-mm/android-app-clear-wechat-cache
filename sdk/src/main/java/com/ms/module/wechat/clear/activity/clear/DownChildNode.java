@@ -7,7 +7,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class DownChildNode  extends BaseExpandNode {
+public class DownChildNode extends BaseExpandNode {
 
     private String name;
     private int icon;

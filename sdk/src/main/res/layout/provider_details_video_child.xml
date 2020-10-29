@@ -10,14 +10,12 @@
         android:layout_height="match_parent"
         android:scaleType="fitXY" />
 
-
     <ImageView
         android:id="@+id/imageViewCheck"
         android:layout_width="16.67dp"
         android:layout_height="16.67dp"
         android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:layout_marginRight="10dp"
+        android:layout_alignParentBottom="true"
         android:background="@drawable/selector_select_image" />
 
 </RelativeLayout>

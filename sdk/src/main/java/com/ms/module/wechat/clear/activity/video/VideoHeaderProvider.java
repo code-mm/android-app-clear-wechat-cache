@@ -1,11 +1,8 @@
 package com.ms.module.wechat.clear.activity.video;
 
 import android.view.View;
-import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import androidx.core.view.ViewCompat;
 
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.entity.node.BaseNode;
@@ -15,6 +12,7 @@ import com.ms.module.wechat.clear.R;
 import com.ms.module.wechat.clear.activity.file.FileAdapter;
 import com.ms.module.wechat.clear.activity.file.FileChildNode;
 import com.ms.module.wechat.clear.activity.file.FileHeaderNode;
+import com.ms.module.wechat.clear.activity.voice.VoiceDetailsActivity;
 import com.ms.module.wechat.clear.utils.ByteSizeToStringUnitUtils;
 import com.ms.module.wechat.clear.utils.ListDataUtils;
 
@@ -46,51 +44,37 @@ public class VideoHeaderProvider extends BaseNodeProvider {
         if (baseNode instanceof FileHeaderNode) {
             FileHeaderNode headerNode = (FileHeaderNode) baseNode;
             textViewDate.setText(headerNode.getDate());
-
-
             if (headerNode.isExpanded()) {
                 Glide.with(context).load(R.drawable.image_down_gray).into(imageViewStatus);
             } else {
                 Glide.with(context).load(R.drawable.image_right_gray).into(imageViewStatus);
             }
-
             textViewSize.setText(ByteSizeToStringUnitUtils.byteToStringUnit(headerNode.getSize()));
             textViewCount.setText(headerNode.getChildNode().size() + "项");
             imageViewCheck.setSelected(headerNode.isCheck());
 
             List<BaseNode> childNode = headerNode.getChildNode();
-            boolean check = ListDataUtils.check(childNode);
+            boolean check = ListDataUtils.checkFileChildNode(childNode);
             imageViewCheck.setSelected(check);
             headerNode.setCheck(check);
 
             imageViewCheck.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
                     List<BaseNode> childNode = headerNode.getChildNode();
                     if (headerNode.isCheck()) {
-
-                        for (int i = 0; i < childNode.size(); i++) {
-                            BaseNode baseNode1 = childNode.get(i);
-
-                            if (baseNode1 instanceof FileChildNode) {
-                                FileChildNode videoChildNode = (FileChildNode) baseNode1;
-                                videoChildNode.setCheck(false);
-                            }
-                        }
+                        ListDataUtils.setCheck(childNode, false);
                         headerNode.setCheck(false);
                     } else {
-                        for (int i = 0; i < childNode.size(); i++) {
-                            BaseNode baseNode1 = childNode.get(i);
-                            if (baseNode1 instanceof FileChildNode) {
-                                FileChildNode videoChildNode = (FileChildNode) baseNode1;
-                                videoChildNode.setCheck(true);
-                            }
-                        }
+                        ListDataUtils.setCheck(childNode, true);
                         headerNode.setCheck(true);
                     }
 
                     getAdapter().notifyDataSetChanged();
-                    VideoDetailsActivity.getInstance().updateSelectAll();
+                    if (VoiceDetailsActivity.getInstance() != null) {
+                        VoiceDetailsActivity.getInstance().updateSelectAll();
+                    }
                 }
             });
         }

@@ -1,11 +1,8 @@
 package com.ms.module.wechat.clear.activity.voice;
 
 import android.view.View;
-import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import androidx.core.view.ViewCompat;
 
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.entity.node.BaseNode;
@@ -58,9 +55,8 @@ public class VoiceHeaderProvider extends BaseNodeProvider {
                 Glide.with(context).load(R.drawable.image_right_gray).into(imageViewStatus);
             }
 
-
             List<BaseNode> childNode = headerNode.getChildNode();
-            boolean check = ListDataUtils.check(childNode);
+            boolean check = ListDataUtils.checkFileChildNode(childNode);
             headerNode.setCheck(check);
             imageViewCheck.setSelected(check);
 
@@ -70,22 +66,10 @@ public class VoiceHeaderProvider extends BaseNodeProvider {
 
                     List<BaseNode> childNode = headerNode.getChildNode();
                     if (headerNode.isCheck()) {
-                        for (int i = 0; i < childNode.size(); i++) {
-                            BaseNode baseNode1 = childNode.get(i);
-                            if (baseNode1 instanceof FileChildNode) {
-                                FileChildNode voiceChildNode = (FileChildNode) baseNode1;
-                                voiceChildNode.setCheck(false);
-                            }
-                        }
+                        ListDataUtils.setCheck(childNode, false);
                         headerNode.setCheck(false);
                     } else {
-                        for (int i = 0; i < childNode.size(); i++) {
-                            BaseNode baseNode1 = childNode.get(i);
-                            if (baseNode1 instanceof FileChildNode) {
-                                FileChildNode voiceChildNode = (FileChildNode) baseNode1;
-                                voiceChildNode.setCheck(true);
-                            }
-                        }
+                        ListDataUtils.setCheck(childNode, true);
                         headerNode.setCheck(true);
                     }
 

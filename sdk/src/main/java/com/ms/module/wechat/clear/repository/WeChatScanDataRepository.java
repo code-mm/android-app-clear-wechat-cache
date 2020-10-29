@@ -38,69 +38,46 @@ public class WeChatScanDataRepository {
 
     private static final String TAG = "WeChatScanDataRepositor";
 
+
+    /**
+     * 时间 格式化 格式
+     */
+    private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
     private WeChatScanDataRepository() {
     }
 
     private static final WeChatScanDataRepository instance = new WeChatScanDataRepository();
 
+    /**
+     * 单例设计
+     *
+     * @return
+     */
     public static WeChatScanDataRepository getInstance() {
         return instance;
     }
 
     // 朋友圈缓冲
-    public List<String> friendList = new ArrayList<>();
+    public final List<String> friendList = new ArrayList<>();
 
-    public List<String> cacheList = new ArrayList<>();
+    public final List<String> cacheList = new ArrayList<>();
 
     // 垃圾文件
-    public List<String> rubbishList = new ArrayList<>();
+    public final List<String> rubbishList = new ArrayList<>();
     // video
-    public List<String> videoList = new ArrayList<>();
+    public final List<String> videoList = new ArrayList<>();
     // image
-    public List<String> imageList = new ArrayList<>();
+    public final List<String> imageList = new ArrayList<>();
     // voice
-    public List<String> voiceList = new ArrayList<>();
+    public final List<String> voiceList = new ArrayList<>();
     // file
-    public List<String> fileList = new ArrayList<>();
+    public final List<String> fileList = new ArrayList<>();
     // emoji
-    public List<String> emojiList = new ArrayList<>();
-
-
-    public List<String> getCacheList() {
-        return cacheList;
-    }
-
-    public List<String> getFriendList() {
-        return friendList;
-    }
-
-    public List<String> getEmojiList() {
-        return emojiList;
-    }
-
-    public List<String> getFileList() {
-        return fileList;
-    }
-
-    public List<String> getImageList() {
-        return imageList;
-    }
-
-    public List<String> getRubbishList() {
-        return rubbishList;
-    }
-
-    public List<String> getVoiceList() {
-        return voiceList;
-    }
-
-    public List<String> getVideoList() {
-        return videoList;
-    }
+    public final List<String> emojiList = new ArrayList<>();
 
     // 扫描文件总大小
     private MutableLiveData<Long> mutableLiveDataTotalScanGarbageSize;
-
 
     public MutableLiveData<Long> getMutableLiveDataTotalScanGarbageSize() {
         return mutableLiveDataTotalScanGarbageSize;
@@ -121,8 +98,6 @@ public class WeChatScanDataRepository {
         return new LiveData<List<String>>() {
             @Override
             protected void onActive() {
-                super.onActive();
-
                 Observable.create(new ObservableOnSubscribe<List<String>>() {
                     @Override
                     public void subscribe(ObservableEmitter<List<String>> emitter) throws Exception {
@@ -133,9 +108,7 @@ public class WeChatScanDataRepository {
                             totalScanGarbageSize += new File(it).length();
                             mutableLiveDataTotalScanGarbageSize.postValue(totalScanGarbageSize);
                         }
-
                         emitter.onNext(result);
-
                     }
                 })
                         .subscribeOn(Schedulers.io())
@@ -303,7 +276,7 @@ public class WeChatScanDataRepository {
                 Observable.create(new ObservableOnSubscribe<List<String>>() {
                     @Override
                     public void subscribe(@NonNull ObservableEmitter<List<String>> emitter) throws Exception {
-                        List<String> result = WeChatClearUtils.images();
+                        List<String> result = WeChatClearUtils.image();
                         imageList.clear();
                         imageList.addAll(result);
                         for (String it : result) {
@@ -411,7 +384,7 @@ public class WeChatScanDataRepository {
                 Observable.create(new ObservableOnSubscribe<List<String>>() {
                     @Override
                     public void subscribe(@NonNull ObservableEmitter<List<String>> emitter) throws Exception {
-                        List<String> result = WeChatClearUtils.emojis();
+                        List<String> result = WeChatClearUtils.emoji();
                         emojiList.clear();
                         emojiList.addAll(result);
                         for (String it : result) {
@@ -559,7 +532,7 @@ public class WeChatScanDataRepository {
         return new LiveData<List<BaseNode>>() {
             @Override
             protected void onActive() {
-                super.onActive();
+
                 Observable.create(new ObservableOnSubscribe<List<BaseNode>>() {
                     @Override
                     public void subscribe(@NonNull ObservableEmitter<List<BaseNode>> emitter) throws Exception {
@@ -621,7 +594,7 @@ public class WeChatScanDataRepository {
         return new LiveData<List<BaseNode>>() {
             @Override
             protected void onActive() {
-                super.onActive();
+
                 Observable.create(new ObservableOnSubscribe<List<BaseNode>>() {
                     @Override
                     public void subscribe(@NonNull ObservableEmitter<List<BaseNode>> emitter) throws Exception {
@@ -705,9 +678,6 @@ public class WeChatScanDataRepository {
         return new LiveData<List<BaseNode>>() {
             @Override
             protected void onActive() {
-                super.onActive();
-
-
                 Observable.create(new ObservableOnSubscribe<List<BaseNode>>() {
                     @Override
                     public void subscribe(@NonNull ObservableEmitter<List<BaseNode>> emitter) throws Exception {
@@ -789,8 +759,6 @@ public class WeChatScanDataRepository {
         return new LiveData<List<BaseNode>>() {
             @Override
             protected void onActive() {
-                super.onActive();
-
                 Observable.create(new ObservableOnSubscribe<List<BaseNode>>() {
                     @Override
                     public void subscribe(@NonNull ObservableEmitter<List<BaseNode>> emitter) throws Exception {
@@ -865,7 +833,6 @@ public class WeChatScanDataRepository {
         };
     }
 
-
     /**
      * 语音
      *
@@ -875,7 +842,6 @@ public class WeChatScanDataRepository {
         return new LiveData<List<BaseNode>>() {
             @Override
             protected void onActive() {
-                super.onActive();
 
 
                 Observable.create(new ObservableOnSubscribe<List<BaseNode>>() {
@@ -951,8 +917,6 @@ public class WeChatScanDataRepository {
     }
 
 
-    private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-
     /**
      * 视频
      *
@@ -962,8 +926,6 @@ public class WeChatScanDataRepository {
         return new LiveData<List<BaseNode>>() {
             @Override
             protected void onActive() {
-                super.onActive();
-
                 Observable.create(new ObservableOnSubscribe<List<BaseNode>>() {
                     @Override
                     public void subscribe(@NonNull ObservableEmitter<List<BaseNode>> emitter) throws Exception {
@@ -1033,7 +995,6 @@ public class WeChatScanDataRepository {
         };
     }
 
-
     public long getFilesLength(List<BaseNode> datas) {
         List<String> deletes = new ArrayList<>();
         for (int i = 0; i < datas.size(); i++) {
@@ -1066,21 +1027,14 @@ public class WeChatScanDataRepository {
                 }
             }
         }
-
         long fileLength = WeChatClearUtils.getFileLength(deletes);
-
         return fileLength;
     }
 
-
     public void deleteFiles(List<BaseNode> datas) {
-
-
         Observable.create(new ObservableOnSubscribe<Boolean>() {
             @Override
             public void subscribe(@NonNull ObservableEmitter<Boolean> emitter) throws Exception {
-
-
                 List<String> deletes = new ArrayList<>();
                 for (int i = 0; i < datas.size(); i++) {
                     BaseNode baseNode = datas.get(i);
@@ -1112,14 +1066,10 @@ public class WeChatScanDataRepository {
                         }
                     }
                 }
-
                 for (String it : deletes) {
                     WeChatClearUtils.delete(it);
                 }
-
                 emitter.onComplete();
-
-
             }
         }).subscribeOn(Schedulers.io())
                 .subscribe(new Observer<Boolean>() {
@@ -1156,85 +1106,71 @@ public class WeChatScanDataRepository {
         Observable.create(new ObservableOnSubscribe<Boolean>() {
             @Override
             public void subscribe(@NonNull ObservableEmitter<Boolean> emitter) throws Exception {
-
-
-                List<String> deletes = new ArrayList<>();
+                List<String> listDelete = new ArrayList<>();
                 for (int i = 0; i < datas.size(); i++) {
                     BaseNode baseNode = datas.get(i);
-
                     if (baseNode instanceof FileHeaderNode) {
-                        FileHeaderNode imageHeaderNode = (FileHeaderNode) baseNode;
-                        boolean check = imageHeaderNode.isCheck();
+                        FileHeaderNode headerNode = (FileHeaderNode) baseNode;
+                        boolean check = headerNode.isCheck();
                         if (check) {
-                            List<BaseNode> childNode = imageHeaderNode.getChildNode();
+                            List<BaseNode> childNode = headerNode.getChildNode();
                             for (int j = 0; j < childNode.size(); j++) {
-                                BaseNode baseNode1 = childNode.get(j);
-                                if (baseNode1 instanceof FileChildNode) {
-                                    FileChildNode imageChildNode = (FileChildNode) baseNode1;
-                                    deletes.add(imageChildNode.getPath());
+                                BaseNode baseNodeT = childNode.get(j);
+                                if (baseNodeT instanceof FileChildNode) {
+                                    FileChildNode imageChildNode = (FileChildNode) baseNodeT;
+                                    listDelete.add(imageChildNode.getPath());
+                                    childNode.remove(j);
                                 }
                             }
                         } else {
-                            List<BaseNode> childNode = imageHeaderNode.getChildNode();
+                            List<BaseNode> childNode = headerNode.getChildNode();
                             for (int j = 0; j < childNode.size(); j++) {
-                                BaseNode baseNode1 = childNode.get(j);
-                                if (baseNode1 instanceof FileChildNode) {
-                                    FileChildNode imageChildNode = (FileChildNode) baseNode1;
-                                    boolean check1 = imageChildNode.isCheck();
+                                BaseNode baseNodeT = childNode.get(j);
+                                if (baseNodeT instanceof FileChildNode) {
+                                    FileChildNode childNodeT = (FileChildNode) baseNodeT;
+                                    boolean check1 = childNodeT.isCheck();
                                     if (check1) {
-                                        deletes.add(imageChildNode.getPath());
+                                        listDelete.add(childNodeT.getPath());
+                                        childNode.remove(j);
                                     }
                                 }
                             }
                         }
                     }
-
 
                     if (baseNode instanceof UpGroupNode) {
                         UpGroupNode upGroupNode = (UpGroupNode) baseNode;
                         if (upGroupNode.isCheck()) {
                             List<BaseNode> childNode = upGroupNode.getChildNode();
-
                             for (int k = 0; k < childNode.size(); k++) {
-                                BaseNode baseNode1 = childNode.get(k);
-                                if (baseNode1 instanceof UpChildNode) {
-                                    UpChildNode upChildNode = (UpChildNode) baseNode1;
-                                    deletes.addAll(upChildNode.getPaths());
+                                BaseNode baseNodeT = childNode.get(k);
+                                if (baseNodeT instanceof UpChildNode) {
+                                    UpChildNode upChildNode = (UpChildNode) baseNodeT;
+                                    listDelete.addAll(upChildNode.getPaths());
+                                    childNode.remove(k);
                                 }
                             }
-
                         } else {
                             List<BaseNode> childNode = upGroupNode.getChildNode();
-
                             for (int k = 0; k < childNode.size(); k++) {
-                                BaseNode baseNode1 = childNode.get(k);
-                                if (baseNode1 instanceof UpChildNode) {
-                                    UpChildNode upChildNode = (UpChildNode) baseNode1;
-
+                                BaseNode baseNodeT = childNode.get(k);
+                                if (baseNodeT instanceof UpChildNode) {
+                                    UpChildNode upChildNode = (UpChildNode) baseNodeT;
                                     boolean check = upChildNode.isCheck();
-
                                     if (check) {
-                                        deletes.addAll(upChildNode.getPaths());
+                                        listDelete.addAll(upChildNode.getPaths());
+                                        childNode.remove(k);
                                     }
                                 }
                             }
                         }
                     }
                 }
-
-                Log.e(TAG, "subscribe: " + deletes.size());
-
-                for (String it : deletes) {
+                for (String it : listDelete) {
                     boolean delete = WeChatClearUtils.delete(it);
-
-
-                    Log.e(TAG, "subscribe: " + it + " 删除成功 : " + delete);
-
                 }
-
+                // 删除完成
                 emitter.onComplete();
-
-
             }
         }).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

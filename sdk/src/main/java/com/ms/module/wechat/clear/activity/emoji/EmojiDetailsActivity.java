@@ -2,6 +2,7 @@ package com.ms.module.wechat.clear.activity.emoji;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -23,6 +24,7 @@ import com.ms.module.wechat.clear.base.BaseAppCompatActivity;
 import com.ms.module.wechat.clear.base.RxView;
 import com.ms.module.wechat.clear.base.StatusBarUtil;
 import com.ms.module.wechat.clear.dialog.DialogDelete;
+import com.ms.module.wechat.clear.utils.ListDataUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,27 +58,8 @@ public class EmojiDetailsActivity extends BaseAppCompatActivity implements RxVie
         return instance;
     }
 
-
     public void updateSelectAll() {
-        boolean check = true;
-        for (int i = 0; i < datas.size(); i++) {
-            BaseNode baseNode = datas.get(i);
-            if (baseNode instanceof FileHeaderNode) {
-                FileHeaderNode headerNode = (FileHeaderNode) baseNode;
-                List<BaseNode> childNode = headerNode.getChildNode();
-                for (int j = 0; j < childNode.size(); j++) {
-                    BaseNode baseNode1 = childNode.get(j);
-                    if (baseNode1 instanceof FileChildNode) {
-                        FileChildNode childNode1 = (FileChildNode) baseNode1;
-
-                        if (!childNode1.isCheck()) {
-                            check = false;
-                        }
-                    }
-                }
-            }
-        }
-        imageViewCheck.setSelected(check);
+        imageViewCheck.setSelected(ListDataUtils.checkAllNode(datas));
     }
 
 
@@ -90,6 +73,8 @@ public class EmojiDetailsActivity extends BaseAppCompatActivity implements RxVie
 
     @Override
     protected void initView() {
+
+
         super.initView();
         recyclerView = findViewById(R.id.recyclerView);
         imageViewBack = findViewById(R.id.imageViewBack);

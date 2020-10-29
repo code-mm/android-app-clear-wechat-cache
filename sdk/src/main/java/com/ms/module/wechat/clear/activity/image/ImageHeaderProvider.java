@@ -16,7 +16,9 @@ import com.ms.module.wechat.clear.activity.emoji.EmojiDetailsActivity;
 import com.ms.module.wechat.clear.activity.file.FileAdapter;
 import com.ms.module.wechat.clear.activity.file.FileChildNode;
 import com.ms.module.wechat.clear.activity.file.FileHeaderNode;
+import com.ms.module.wechat.clear.activity.voice.VoiceDetailsActivity;
 import com.ms.module.wechat.clear.utils.ByteSizeToStringUnitUtils;
+import com.ms.module.wechat.clear.utils.ListDataUtils;
 
 
 import org.jetbrains.annotations.NotNull;
@@ -49,68 +51,35 @@ public class ImageHeaderProvider extends BaseNodeProvider {
 
 
         if (baseNode instanceof FileHeaderNode) {
-            FileHeaderNode imageHeaderNode = (FileHeaderNode) baseNode;
+            FileHeaderNode headerNode = (FileHeaderNode) baseNode;
 
-            textViewDate.setText(imageHeaderNode.getDate());
-            textViewSize.setText(ByteSizeToStringUnitUtils.byteToStringUnit(imageHeaderNode.getSize()));
-            textViewCount.setText(imageHeaderNode.getCount() + "项");
+            textViewDate.setText(headerNode.getDate());
+            textViewSize.setText(ByteSizeToStringUnitUtils.byteToStringUnit(headerNode.getSize()));
+            textViewCount.setText(headerNode.getCount() + "项");
 
-
-            if (imageHeaderNode.isExpanded()) {
+            if (headerNode.isExpanded()) {
                 Glide.with(context).load(R.drawable.image_down_gray).into(imageViewStatus);
             } else {
                 Glide.with(context).load(R.drawable.image_right_gray).into(imageViewStatus);
             }
 
-
-            List<BaseNode> childNode = imageHeaderNode.getChildNode();
-
-            imageViewCheck.setSelected(imageHeaderNode.isCheck());
-
-
-            boolean check = true;
-
-
-            for (int i = 0; i < childNode.size(); i++) {
-                BaseNode baseNode1 = childNode.get(i);
-
-                if (baseNode1 instanceof FileChildNode) {
-                    FileChildNode fileChildNode = (FileChildNode) baseNode1;
-                    if (!fileChildNode.isCheck()) {
-                        check = false;
-                    }
-                }
-            }
-            imageViewCheck.setSelected(check);
+            List<BaseNode> childNode = headerNode.getChildNode();
+            imageViewCheck.setSelected(ListDataUtils.checkFileChildNode(childNode));
 
             imageViewCheck.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
-                    if (imageHeaderNode.isCheck()) {
-                        for (int i = 0; i < childNode.size(); i++) {
-                            BaseNode baseNode1 = childNode.get(i);
-                            if (baseNode1 instanceof FileChildNode) {
-                                FileChildNode imageChildNode = (FileChildNode) baseNode1;
-                                imageChildNode.setCheck(false);
-                            }
-                        }
-
-                        imageHeaderNode.setCheck(false);
-
+                    List<BaseNode> childNode = headerNode.getChildNode();
+                    if (headerNode.isCheck()) {
+                        ListDataUtils.setCheck(childNode, false);
+                        headerNode.setCheck(false);
                     } else {
-                        for (int i = 0; i < childNode.size(); i++) {
-                            BaseNode baseNode1 = childNode.get(i);
-                            if (baseNode1 instanceof FileChildNode) {
-                                FileChildNode imageChildNode = (FileChildNode) baseNode1;
-                                imageChildNode.setCheck(true);
-                            }
-                        }
-
-                        imageHeaderNode.setCheck(true);
+                        ListDataUtils.setCheck(childNode, true);
+                        headerNode.setCheck(true);
                     }
-                    getAdapter().notifyDataSetChanged();
 
+                    getAdapter().notifyDataSetChanged();
 
                     if (ImageDetailsActivity.getInstance() != null) {
                         ImageDetailsActivity.getInstance().updateSelectAll();

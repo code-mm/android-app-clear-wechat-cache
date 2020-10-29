@@ -21,6 +21,8 @@ import com.ms.module.wechat.clear.base.BaseAppCompatActivity;
 import com.ms.module.wechat.clear.base.RxView;
 import com.ms.module.wechat.clear.base.StatusBarUtil;
 import com.ms.module.wechat.clear.dialog.DialogDelete;
+import com.ms.module.wechat.clear.repository.WeChatScanDataRepository;
+import com.ms.module.wechat.clear.utils.ListDataUtils;
 
 
 import java.util.ArrayList;
@@ -30,7 +32,7 @@ public class ImageDetailsActivity extends BaseAppCompatActivity implements RxVie
 
     private RecyclerView recyclerView;
 
-    private ImageAdapter imageAdapter;
+    private ImageAdapter adapter;
 
     private ImageDetailsViewModel imageDetailsViewModel;
 
@@ -49,27 +51,8 @@ public class ImageDetailsActivity extends BaseAppCompatActivity implements RxVie
     }
 
     public void updateSelectAll() {
-        boolean check = true;
-        for (int i = 0; i < datas.size(); i++) {
-            BaseNode baseNode = datas.get(i);
-            if (baseNode instanceof FileHeaderNode) {
-                FileHeaderNode headerNode = (FileHeaderNode) baseNode;
-                List<BaseNode> childNode = headerNode.getChildNode();
-                for (int j = 0; j < childNode.size(); j++) {
-                    BaseNode baseNode1 = childNode.get(j);
-                    if (baseNode1 instanceof FileChildNode) {
-                        FileChildNode childNode1 = (FileChildNode) baseNode1;
-
-                        if (!childNode1.isCheck()) {
-                            check = false;
-                        }
-                    }
-                }
-            }
-        }
-        imageViewCheck.setSelected(check);
+        imageViewCheck.setSelected(ListDataUtils.checkAllNode(datas));
     }
-
 
     @Override
     protected void setStatusBar() {
@@ -133,7 +116,7 @@ public class ImageDetailsActivity extends BaseAppCompatActivity implements RxVie
                     }
                     imageViewCheck.setSelected(true);
                 }
-                imageAdapter.notifyDataSetChanged();
+                adapter.notifyDataSetChanged();
             }
         });
     }
@@ -168,13 +151,13 @@ public class ImageDetailsActivity extends BaseAppCompatActivity implements RxVie
                     }
                 }
 
-                if (imageAdapter == null) {
-                    imageAdapter = new ImageAdapter();
+                if (adapter == null) {
+                    adapter = new ImageAdapter();
                     recyclerView.setLayoutManager(new GridLayoutManager(ImageDetailsActivity.this, 4));
-                    imageAdapter.setList(datas);
-                    recyclerView.setAdapter(imageAdapter);
+                    adapter.setList(datas);
+                    recyclerView.setAdapter(adapter);
                 } else {
-                    imageAdapter.notifyDataSetChanged();
+                    adapter.notifyDataSetChanged();
                 }
             }
         });
@@ -196,6 +179,8 @@ public class ImageDetailsActivity extends BaseAppCompatActivity implements RxVie
                 @Override
                 public void onDelete() {
                     // 去删除页面
+                    WeChatClearModule.getWeChatClearCallBack().onDeleteFile(ImageDetailsActivity.this, WeChatScanDataRepository.getInstance().getFilesLength(datas));
+                    WeChatScanDataRepository.getInstance().deleteFile(datas, adapter);
                 }
             });
         }

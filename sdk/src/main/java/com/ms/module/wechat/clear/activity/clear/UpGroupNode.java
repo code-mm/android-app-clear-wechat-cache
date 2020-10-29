@@ -8,9 +8,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class UpGroupNode extends BaseExpandNode {
-
     private List<BaseNode> childNode;
-
     private long size;
     private boolean check;
 
@@ -21,7 +19,6 @@ public class UpGroupNode extends BaseExpandNode {
     public void setSize(long size) {
         this.size = size;
     }
-
 
     public UpGroupNode(List<BaseNode> childNode, long size, boolean check) {
         this.childNode = childNode;
@@ -38,7 +35,6 @@ public class UpGroupNode extends BaseExpandNode {
     public List<BaseNode> getChildNode() {
         return childNode;
     }
-
 
     public boolean isCheck() {
         return check;

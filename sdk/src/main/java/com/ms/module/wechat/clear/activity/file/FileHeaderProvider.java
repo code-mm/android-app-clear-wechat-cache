@@ -1,17 +1,16 @@
 package com.ms.module.wechat.clear.activity.file;
 
 import android.view.View;
-import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import androidx.core.view.ViewCompat;
 
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.entity.node.BaseNode;
 import com.chad.library.adapter.base.provider.BaseNodeProvider;
 import com.chad.library.adapter.base.viewholder.BaseViewHolder;
 import com.ms.module.wechat.clear.R;
+import com.ms.module.wechat.clear.activity.emoji.EmojiDetailsActivity;
+import com.ms.module.wechat.clear.activity.image.ImageDetailsActivity;
 import com.ms.module.wechat.clear.utils.ByteSizeToStringUnitUtils;
 import com.ms.module.wechat.clear.utils.ListDataUtils;
 
@@ -57,33 +56,20 @@ public class FileHeaderProvider extends BaseNodeProvider {
 
 
             List<BaseNode> childNode = headerNode.getChildNode();
-            boolean check = ListDataUtils.check(childNode);
+            boolean check = ListDataUtils.checkFileChildNode(childNode);
             imageViewCheck.setSelected(check);
             headerNode.setCheck(check);
 
             imageViewCheck.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (headerNode.isCheck()) {
-                        List<BaseNode> childNode = headerNode.getChildNode();
-                        for (int i = 0; i < childNode.size(); i++) {
-                            BaseNode baseNode1 = childNode.get(i);
-                            if (baseNode1 instanceof FileChildNode) {
-                                FileChildNode fileChildNode = (FileChildNode) baseNode1;
-                                fileChildNode.setCheck(false);
-                            }
-                        }
-                        headerNode.setCheck(false);
 
+                    List<BaseNode> childNode = headerNode.getChildNode();
+                    if (headerNode.isCheck()) {
+                        ListDataUtils.setCheck(childNode, false);
+                        headerNode.setCheck(false);
                     } else {
-                        List<BaseNode> childNode = headerNode.getChildNode();
-                        for (int i = 0; i < childNode.size(); i++) {
-                            BaseNode baseNode1 = childNode.get(i);
-                            if (baseNode1 instanceof FileChildNode) {
-                                FileChildNode fileChildNode = (FileChildNode) baseNode1;
-                                fileChildNode.setCheck(true);
-                            }
-                        }
+                        ListDataUtils.setCheck(childNode, true);
                         headerNode.setCheck(true);
                     }
 
