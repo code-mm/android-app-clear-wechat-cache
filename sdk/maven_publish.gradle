@@ -1,0 +1,22 @@
+apply plugin: "maven-publish"
+afterEvaluate {
+    publishing {
+        repositories {
+            maven {
+                url "https://nexus.mhw828.com/repository/maven-releases/"
+                credentials {
+                    username System.getenv("MAVEN_USERNAME")
+                    password System.getenv("MAVEN_PASSWORD")
+                }
+            }
+        }
+        publications {
+            release(MavenPublication) {
+                from components.release
+                groupId = 'com.sy'
+                artifactId = rootProject.name
+                version = 'latest-release'
+            }
+        }
+    }
+}

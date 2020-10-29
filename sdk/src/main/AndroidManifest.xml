@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.ms.module.wechat.clear">
+
+
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <!--    android 11-->
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+    <uses-permission
+        android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
+        tools:ignore="ProtectedPermissions" />
+
+    <!-- 8.0 读取应用使用,使用记录访问权限 -->
+    <uses-permission
+        android:name="android.permission.PACKAGE_USAGE_STATS"
+        tools:ignore="ProtectedPermissions" />
+
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+
+    <application>
+
+        <activity android:name=".ui.activity.wechat.ing.WeChatClearScanIngActivity" />
+
+        <activity android:name=".ui.activity.wechat.clear.WeChatClearActivity" />
+
+        <activity android:name=".ui.activity.wechat.image.ImageActivity" />
+
+        <activity android:name=".ui.activity.wechat.video.VideoDetailsActivity" />
+
+        <activity android:name=".ui.activity.wechat.emoji.EmojiDetailsActivity" />
+
+        <activity android:name=".ui.activity.wechat.file.FileDetailsActivity" />
+
+        <activity android:name=".ui.activity.wechat.image.ImageDetailsActivity" />
+
+        <activity android:name=".ui.activity.wechat.voice.VoiceDetailsActivity" />
+
+    </application>
+
+</manifest>

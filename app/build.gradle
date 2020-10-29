@@ -35,6 +35,12 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
 
+    // 屏幕适配
+    implementation 'me.jessyan:autosize:1.2.1'
+
+    implementation project(':sdk')
+
+
     // material
     implementation 'com.google.android.material:material:1.2.0-alpha06'
 
@@ -47,7 +53,6 @@ dependencies {
     implementation 'com.hjq:xxpermissions:8.8'
 
 
-
     // https://mvnrepository.com/artifact/io.reactivex.rxjava2/rxjava
     implementation group: 'io.reactivex.rxjava2', name: 'rxjava', version: '2.2.20'
 
@@ -55,13 +60,20 @@ dependencies {
     implementation group: 'io.reactivex.rxjava2', name: 'rxandroid', version: '2.1.1'
 
 
+    // recyclerview 多级列表
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.4'
 
+    // 照片放大
+//    implementation 'com.github.chrisbanes:PhotoView:2.3.0'
+    implementation 'com.github.chrisbanes:PhotoView:2.3.0'
+    // implementation 'com.github.chrisbanes:PhotoView:latest.release.here'
 
 }
 
 // 生命周期
 dependencies {
+
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     def lifecycle_version = "2.2.0"
     def arch_version = "2.1.0"
 
